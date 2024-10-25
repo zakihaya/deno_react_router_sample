@@ -7,4 +7,6 @@ services:
     tty: true
     environment:
       TZ: Asia/Tokyo
-    command: ["deno", "repl"]
+    ports:
+      - 5173:5173
+    command: ["deno", "task", "dev", "--host"]
