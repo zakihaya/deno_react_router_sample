@@ -5,6 +5,7 @@ import {
   Routes,
   Link,
   useNavigate,
+  useLocation,
 } from "react-router-dom";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
@@ -26,6 +27,10 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/user/:id" element={<User />} />
       </Routes>
+      ----
+      <div>
+        <LocationInfo />
+      </div>
       ----
       <>
         <div>
@@ -72,6 +77,21 @@ function App() {
     </Router>
   );
 }
+
+const LocationInfo = () => {
+  const location = useLocation();
+
+  return (
+    <div>
+      <h2>Location</h2>
+      <p>path: {location.pathname}</p>
+      <p>search: {location.search}</p>
+      <p>hash: {location.hash}</p>
+      <p>key: {location.key}</p>
+      <p>state: {JSON.stringify(location.state)}</p>
+    </div>
+  );
+};
 
 const NavigateButton = () => {
   const navigate = useNavigate();
