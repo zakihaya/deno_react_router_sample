@@ -64,7 +64,12 @@ function App() {
             <Link to="/user/111">User 111</Link>
           </li>
           <li>
-            <Link to="/user/123">User 123</Link>
+            <Link
+              to="/user/123"
+              state={{ message: "こんにちは、React Router!" }}
+            >
+              User 123
+            </Link>
           </li>
           <li>
             <Link to="/">Home</Link>
