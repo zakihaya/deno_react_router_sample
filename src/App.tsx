@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Link,
+  useNavigate,
+} from "react-router-dom";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -59,9 +65,27 @@ function App() {
             <Link to="/">Home</Link>
           </li>
         </div>
+        <div>
+          <NavigateButton />
+        </div>
       </>
     </Router>
   );
 }
+
+const NavigateButton = () => {
+  const navigate = useNavigate();
+
+  return (
+    <>
+      <button type="button" onClick={() => navigate("/about")}>
+        Go to About
+      </button>
+      <button type="button" onClick={() => navigate(-1)}>
+        Back
+      </button>
+    </>
+  );
+};
 
 export default App;
