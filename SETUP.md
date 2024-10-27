@@ -5,10 +5,18 @@ React Routerを触ってみるサンプル
 # setup
 
 ```
-docker compose up
+docker compose create
 
-docker compose exec -it deno /bin/bash
+docker compose run --rm deno deno install
 ```
+
+# コンテナを起動する
+
+```
+docker compose up
+```
+
+# 初期設定時のメモ
 
 https://docs.deno.com/runtime/tutorials/how_to_with_npm/react/ に従って設定する。
 
