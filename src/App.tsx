@@ -14,6 +14,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import User from "./components/User";
+import { ReactMemoSample } from "./components/sample/ReactMemoSample";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -77,6 +78,9 @@ function App() {
         </div>
         <div>
           <NavigateButton />
+        </div>
+        <div>
+          <ReactMemoSample />
         </div>
       </>
     </Router>
