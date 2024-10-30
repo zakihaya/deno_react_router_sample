@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -14,10 +14,18 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import User from "./components/User";
+import { CustomInput } from "./components/CustomInput";
 import { ReactMemoSample } from "./components/sample/ReactMemoSample";
 
 function App() {
   const [count, setCount] = useState(0);
+  const customInputRef = useRef<HTMLInputElement>();
+
+  const handleButtonClick = () => {
+    if (customInputRef.current) {
+      customInputRef.current.focus();
+    }
+  };
 
   return (
     <Router>
@@ -81,6 +89,13 @@ function App() {
         </div>
         <div>
           <ReactMemoSample />
+        </div>
+        <div>
+          <div>forwardRef Input</div>
+          <CustomInput ref={customInputRef} />
+          <button type="button" onClick={handleButtonClick}>
+            focus
+          </button>
         </div>
       </>
     </Router>
