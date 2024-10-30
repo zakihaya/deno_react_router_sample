@@ -24,6 +24,7 @@ function App() {
   const handleButtonClick = () => {
     if (customInputRef.current) {
       customInputRef.current.focus();
+      customInputRef.current.value = "focused!";
     }
   };
 

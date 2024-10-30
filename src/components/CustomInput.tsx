@@ -12,6 +12,15 @@ export const CustomInput = forwardRef<Partial<HTMLInputElement> | undefined>(
           inputRef.current.focus();
         }
       },
+      // アクセサプロパティの定義にはget/setを使用できる
+      get value() {
+        return inputRef.current?.value || "";
+      },
+      set value(val: string) {
+        if (inputRef.current) {
+          inputRef.current.value = val;
+        }
+      },
     }));
 
     return <input ref={inputRef} {...props} />;
