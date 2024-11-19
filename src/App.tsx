@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -17,6 +17,9 @@ import User from "./components/User";
 import { CustomInput } from "./components/CustomInput";
 import { ReactMemoSample } from "./components/sample/ReactMemoSample";
 
+const LazyHome = React.lazy(() => import("./components/Home"));
+const LazyAbout = React.lazy(() => import("./components/About"));
+
 function App() {
   const [count, setCount] = useState(0);
   const customInputRef = useRef<HTMLInputElement>();
@@ -29,77 +32,89 @@ function App() {
   };
 
   return (
-    <Router>
-      ----
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/user/:id" element={<User />} />
-      </Routes>
-      ----
-      <div>
-        <LocationInfo />
-      </div>
-      ----
-      <>
+    <>
+      <Router>
+        ----
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/user/:id" element={<User />} />
+        </Routes>
+        ----
         <div>
-          <a href="https://vite.dev" target="_blank" rel="noreferrer">
-            <img src={viteLogo} className="logo" alt="Vite logo" />
-          </a>
-          <a href="https://react.dev" target="_blank" rel="noreferrer">
-            <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
+          <LocationInfo />
         </div>
-        <h1>Vite + React</h1>
-        <div className="card">
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is {count}
-          </button>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test HMR
-          </p>
-        </div>
-        <p className="read-the-docs">
-          Click on the Vite and React logos to learn more
-        </p>
-        <div>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact</Link>
-          </li>
-          <li>
-            <Link to="/user/111">User 111</Link>
-          </li>
-          <li>
-            <Link
-              to="/user/123"
-              state={{ message: "こんにちは、React Router!" }}
+        ----
+        <>
+          <div>
+            <a href="https://vite.dev" target="_blank" rel="noreferrer">
+              <img src={viteLogo} className="logo" alt="Vite logo" />
+            </a>
+            <a href="https://react.dev" target="_blank" rel="noreferrer">
+              <img src={reactLogo} className="logo react" alt="React logo" />
+            </a>
+          </div>
+          <h1>Vite + React</h1>
+          <div className="card">
+            <button
+              type="button"
+              onClick={() => setCount((count) => count + 1)}
             >
-              User 123
-            </Link>
-          </li>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-        </div>
-        <div>
-          <NavigateButton />
-        </div>
-        <div>
-          <ReactMemoSample />
-        </div>
-        <div>
-          <div>forwardRef Input</div>
-          <CustomInput ref={customInputRef} />
-          <button type="button" onClick={handleButtonClick}>
-            focus
-          </button>
-        </div>
-      </>
-    </Router>
+              count is {count}
+            </button>
+            <p>
+              Edit <code>src/App.tsx</code> and save to test HMR
+            </p>
+          </div>
+          <p className="read-the-docs">
+            Click on the Vite and React logos to learn more
+          </p>
+          <div>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/contact">Contact</Link>
+            </li>
+            <li>
+              <Link to="/user/111">User 111</Link>
+            </li>
+            <li>
+              <Link
+                to="/user/123"
+                state={{ message: "こんにちは、React Router!" }}
+              >
+                User 123
+              </Link>
+            </li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+          </div>
+          <div>
+            <NavigateButton />
+          </div>
+          <div>
+            <ReactMemoSample />
+          </div>
+          <div>
+            <div>forwardRef Input</div>
+            <CustomInput ref={customInputRef} />
+            <button type="button" onClick={handleButtonClick}>
+              focus
+            </button>
+          </div>
+        </>
+      </Router>
+      <div>
+        <h2>Lazy Components</h2>
+        <div>コード分割の例</div>
+        <Suspense fallback={<div>Loading About...</div>}>
+          <LazyAbout />
+        </Suspense>
+      </div>
+    </>
   );
 }
 
